@@ -6,9 +6,6 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/sagargurtu/lector/releases"><img alt="Release" src="https://img.shields.io/github/release/sagargurtu/lector.svg"/></a>
-  <a href="https://github.com/sagargurtu/lector/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/sagargurtu/lector.svg"/></a>
-  <a href="https://github.com/sagargurtu/lector/issues"><img alt="Issues" src="https://img.shields.io/github/issues/sagargurtu/lector.svg"/></a>
-  <a href="https://github.com/sagargurtu/lector"><img alt="Code Size" src="https://img.shields.io/github/languages/code-size/sagargurtu/lector.svg"/></a>
-  <a href="https://github.com/sagargurtu/lector"><img alt="Downloads" src="https://img.shields.io/github/downloads/sagargurtu/lector/total.svg"/></a>
+  <a href="https://github.com/theakashanand/beam-bending-flask/releases"><img alt="Release" src="https://img.shields.io/github/release/sagargurtu/lector.svg"/></a>
+  <a href="https://github.com/theakashanand/beam-bending-flask"><img alt="Code Size" src="https://img.shields.io/github/languages/code-size/sagargurtu/lector.svg"/></a>
 </p>
