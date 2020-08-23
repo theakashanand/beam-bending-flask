@@ -11,9 +11,9 @@
 </p>
 
 <p align="center">
-  <img alt="Inputs" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/InputsScreen.png" width=800/>
+  <img alt="Inputs" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/InputsDistributedLoadScreenshot.png" width=800/>
 </p>
 
 <p align="center">
-  <img alt="Results" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/ResultsScreen.png" width=800/>
+  <img alt="Results" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/ShearForceScreenshot.png" width=800/>
 </p>
