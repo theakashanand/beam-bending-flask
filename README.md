@@ -21,10 +21,25 @@
 * Results: Plots shear force, bending moment, displacement, and slope of the loaded beam. Additionally gives a pictorial representation of the beam and it's loading conditions.
 * Full version report available <a href = "https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/beam_app_v1.0.0.pdf">here</a>
 
+## Screenshots
+<p align="center">
+  <img alt="Inputs" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/InputsDistributedLoadScreenshot.jpg" width=800/>
+</p>
+
+<p align="center">
+  <img alt="Results" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/ShearForceScreenshot.jpg" width=800/>
+</p>
+
+
 ## Getting started
 
 ### Demo
 Live demo running on <a href="www.beam-designer.herokuapp.com">www.beam-designer.herokuapp.com</a>
+
+### Dependencies
+
+* Python 3
+* HTML 5
 
 ### Setup
 Clone this repo to your local machine and cd into the new directory
@@ -47,11 +62,3 @@ python application.py
 ```
 By default the web application should be running on localhost:5000
 
-## Screenshots
-<p align="center">
-  <img alt="Inputs" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/InputsDistributedLoadScreenshot.jpg" width=800/>
-</p>
-
-<p align="center">
-  <img alt="Results" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/ShearForceScreenshot.jpg" width=800/>
-</p>
