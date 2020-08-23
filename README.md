@@ -27,7 +27,7 @@
 </p>
 
 <p align="center">
-  <img alt="Results" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/ShearForceScreenshot.jpg" width=800/>
+  <img alt="Results" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/ShearForce.png" width=800/>
 </p>
 
 
