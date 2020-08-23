@@ -8,6 +8,7 @@
 <p align="center">
   <a href="https://github.com/theakashanand/beam-bending-flask/releases"><img alt="Release" src="https://img.shields.io/github/release/theakashanand/beam-bending-flask.svg"/></a>
   <a href="https://github.com/theakashanand/beam-bending-flask"><img alt="Code Size" src="https://img.shields.io/github/languages/code-size/theakashanand/beam-bending-flask.svg"/></a>
+  <a href="www.beam-designer.herokuapp.com"><img alt="Demo" src="https://img.shields.io/badge/demo-online-green.svg"/></a>
 </p>
 
 ## What's new?
