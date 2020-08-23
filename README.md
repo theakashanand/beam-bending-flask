@@ -10,14 +10,6 @@
   <a href="https://github.com/theakashanand/beam-bending-flask"><img alt="Code Size" src="https://img.shields.io/github/languages/code-size/theakashanand/beam-bending-flask.svg"/></a>
 </p>
 
-<p align="center">
-  <img alt="Inputs" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/InputsDistributedLoadScreenshot.jpg" width=800/>
-</p>
-
-<p align="center">
-  <img alt="Results" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/ShearForceScreenshot.jpg" width=800/>
-</p>
-
 ## What's new?
 
 #### v1.0.0
@@ -54,3 +46,12 @@ Run the web application on your local server using
 python application.py
 ```
 By default the web application should be running on localhost:5000
+
+## Screenshots
+<p align="center">
+  <img alt="Inputs" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/InputsDistributedLoadScreenshot.jpg" width=800/>
+</p>
+
+<p align="center">
+  <img alt="Results" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/ShearForceScreenshot.jpg" width=800/>
+</p>
