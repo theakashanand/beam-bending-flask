@@ -1,0 +1,595 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block page_content %}
+        
+
+        <br>
+        <div class="container" id="loading" style="display: none;">
+            <h3 style="text-align: center;">Solving...</h3>
+            <br>
+            <p style="text-align: center;">Computations can take up to 30 seconds.</p>
+            <img id="gif_load" style="width:300px; height:250px" src="../static/loading.gif">
+        </div>
+        
+        <div class="container" id="results">
+
+            <h3 id="results-header" style="display:none;">Results:</h3>
+            <div id="load" class="alert alert-success" role="alert" style="display:none;">Success!
+                <a href="results" id="results-link" target="_blank">
+                    <br>Click for results report
+                </a>
+                <a href="" id="results-link">
+                    <br>Click to start over
+                </a>
+            </div>
+            <div id="fail" class="alert alert-danger" role="alert" style="display:none;">Looks like we couldn't compute your Beam. Please check your input conditions!
+                <a href="troubleshoot" id="fail" target="_blank"><br>Click for support</a>
+            </div>
+            
+        
+        </div><!--close results div-->
+
+        <div class="container">
+            
+            <div class="row">
+                
+                <div class="col-sm-6">
+                    <h3>Beam Description</h3>
+                    <hr>
+                    <div id="beam-description">
+                        <br>
+                    <div class="row">
+                    <label class="col-sm-6" id="label">Length (m): </label>
+                    <div class="col-sm-6"><input id="beam-length" class="input-box" type="number" min="0" class="number-input" required></div>
+                    </div>
+                    <!--<p><span class="emsg hidden">Length must be a positive decimal number</span></p>-->
+
+
+                    <br>
+
+                    <div class="row">
+                    <div class="col-sm-6" id="label">Elastic Modulus (Pa): </div>
+                    <div class="col-sm-6"><input id="E" class="input-box" type="number" min="0" class="number-input" value="2E9"></div>
+                    <br>       
+                    </div>            
+
+                    <br>
+                    
+                    <div class="row">
+                        <div class="col-sm-6" id="label">Cross Section:</div>
+                        
+                        <div class="col-sm-6">       
+                            
+                            <select id="cb-cross-section-shape" class="input-box">
+                                <option value="custom">Custom</option>
+                                <option value="rectangle">Rectangle</option>
+                                <option value="circle">Circle</option>
+                                <option value="box">Box</option>
+                                <option value="pipe">Pipe</option>
+                                <option value="i">I Beam</option>
+                            </select>
+                        </div>
+                                          
+                    </div>
+
+                    <br>
+
+                    <div id="custom" class="shape">
+                        <br>
+                        <div class="row">
+                        <div class="col-sm-6"><label id="label">Area Moment of Inertia (m<sup>4</sup>)</math>: </label></div>
+                        <div class="col-sm-6"><input id="I" class="input-box" type="number" min="0" class="number-input" value="3E6" ></div>
+                        </div>
+                    <br>  
+                    </div>
+
+                    <div id="rectangle" class="shape" style="display:none;">
+                        <img src="../static/Rectangle_Beam.jpg" >
+
+                        <div class="row">
+                        <div class="col-sm-6" id="label">h (m):</div>
+                        <div class="col-sm-6"><input id="rect-h" class="input-box" value="0" type="number" min="0" class="number-input" ></div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-6" id="label">b (m):</div>
+                        <div class="col-sm-6"><input id="rect-b" class="input-box" value="0" type="number" min="0" class="number-input" ></div>
+                        </div>
+                        <br>
+                    </div><!--end rectangle-->
+
+                    <div id="circle" class="shape" style="display:none;">
+
+                    
+                        <img src="../static/Circle_Beam.jpg">
+
+
+                        <div class="row">
+                        <div class="col-sm-6" id="label">d (m):</div>
+                        <div class="col-sm-6"><input id="circ-d" class="input-box" value="0" type="number" min="0" class="number-input" ></div>
+                        </div>
+                    </div>
+
+                    <div id="box" class="shape" style="display:none;">
+                        <img src="../static/Box_Beam.jpg">
+
+                        <div class="row">
+                        <div class="col-sm-6" id="label">h (m):</div>
+                        <div class="col-sm-6"><input id="box-h" class="input-box" value="0" type="number" min="0" class="number-input" ></div>                      
+                        </div>
+
+                        <div class="row">    
+                        <div class="col-sm-6" id="label">b (m):</div>
+                        <div class="col-sm-6"><input id="box-b" class="input-box" value="0" type="number" min="0" class="number-input" ></div>                       
+                        </div>
+
+                        <div class="row">  
+                        <div class="col-sm-6" id="label">t<sub>1</sub>(m):</div>
+                        <div class="col-sm-6"><input id="box-t1" class="input-box" value="0" type="number" min="0" class="number-input" ></div>
+                        </div>  
+
+                        <div class="row">
+                        <div class="col-sm-6" id="label">t<sub>2</sub>(m):</div>
+                        <div class="col-sm-6"><input id="box-t2" class="input-box" value="0" type="number" min="0" class="number-input" ></div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-6" id="label">t<sub>3</sub>(m):</div>
+                        <div class="col-sm-6"><input id="box-t3" class="input-box" value="0" type="number" min="0" class="number-input" ></div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-6" id="label">t<sub>4</sub>(m):</div>
+                        <div class="col-sm-6"><input id="box-t4" class="input-box" value="0" type="number" min="0" class="number-input" ></div>
+                        </div>
+                    </div>
+
+                    <div id="pipe" class="shape" style="display:none;">
+                        <img src="../static/Pipe_Beam.jpg">
+
+                        <div class="row">
+                        <div class="col-sm-6" id="label">d (m):</div>
+                        <div class="col-sm-6"><input id="pipe-d" class="input-box" value="0" type="number" min="0" class="number-input" ></div>
+                        
+                        </div>
+
+                        <div class="row">
+                        <div class="col-sm-6" id="label">t (m):</div>
+                        <div class="col-sm-6"><input id="pipe-t" class="input-box" value="0" type="number" min="0" class="number-input" ></div>
+                        
+                        </div>
+
+                    </div> <!-- end pipe -->
+
+                    <div id="i" class="shape" style="display:none;">
+                        <img src="../static/I_Beam.jpg">
+
+                        <div class="row">
+                        <div class="col-sm-6" id="label">B (m):</div>
+                        <div class="col-sm-6"><input id="i-B" class="input-box" value="0" type="number" min="0" class="number-input" ></div>                      
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6" id="label">a (m):</div>
+                            <div class="col-sm-6"><input id="i-a" class="input-box" value="0" type="number" min="0" class="number-input" ></div>                      
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6" id="label">b (m):</div>
+                            <div class="col-sm-6"><input id="i-b" class="input-box" value="0" type="number" min="0" class="number-input" ></div>                      
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6" id="label">y<sub>b</sub> (m):</div>
+                            <div class="col-sm-6"><input id="i-yb" class="input-box" value="0" type="number" min="0" class="number-input" ></div>                      
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6" id="label">y<sub>t</sub> (m):</div>
+                            <div class="col-sm-6"><input id="i-yt" class="input-box" value="0" type="number" min="0" class="number-input" ></div>                      
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6" id="label">h<sub>t</sub> (m):</div>
+                            <div class="col-sm-6"><input id="i-ht" class="input-box" value="0" type="number" min="0" class="number-input" ></div>                      
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6" id="label">h<sub>b</sub> (m):</div>
+                            <div class="col-sm-6"><input id="i-hb" class="input-box" value="0" type="number" min="0" class="number-input" ></div>                      
+                        </div>
+    
+
+                        
+                    </div>
+
+                    
+
+                    </div>
+                    <div class="mycontent-left"></div>
+                </div>
+                
+                <div class="col-sm-6" >
+                    <h3>Add Supports or Loads</h3>
+                    <hr>
+                    <div class="container" id="add-feature-tabs">
+                        <br>
+
+                        <ul class="nav nav-tabs" role="tablist">
+                          <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#sup" aria-selected="true">Support</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#pl">Point Load</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#mom">Moment</a></li>
+                          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#dl">Distributed Load</a></li>                      
+                        </ul>
+                      
+                        <div class="tab-content">
+                        <!--Add Support Tab-->
+                          <div id="sup" class="tab-pane fade show active">
+                            <br>
+                            <p>Fill in the details to add a constraint</p>
+                            <br>
+                            <div class="row">
+                            <div class="col-sm-6">
+                            Support Type:</div>
+                    
+                            <div class="col-sm-6">
+                            <div id="rb-support" class="radio">
+                                <label><input type="radio" id="rb-fixed" name="radiosupport" checked>Fixed</label><br>
+                                <label><input type="radio" id="rb-pin" name="radiosupport" checked>Pin</label><br>
+                                <label><input type="radio" id="rb-roller" name="radiosupport" checked>Roller</label>
+                            </div>
+                            </div>
+                        </div>
+                            <div id="sl-support-loc">
+                                <div class="row">
+                                <div class="col-sm-6"><label>Location (m):</label></div>
+                                <br>
+                                <input type="range" class="slider" name="rangeInput" min="0" step="0.1" id="sup-loc-slider" oninput="updateSupportText(this.value);">
+                                <input type="number" min="0" class="slider-text" id="sup-loc-value" value="" oninput="updateSupportSlider(this.value)">
+                                </div>
+                            </div><br>
+                            <button id="add-support"  class="button tab-button" type="button" onclick="addSupport()">Add</button>
+                            <button id="clear-support"  class="button tab-button" type="button">Clear</button>
+                            </div>
+
+
+                          <!--Add Point Load Tab-->
+                          <div id="pl" class="tab-pane fade">
+                            <br>
+                            <p>Fill in the details to add a point load. </p>
+                            <div class="row">
+                                <div class="col-sm-6">Magnitude (N):
+                                    <a href="#" data-toggle="tooltip" title="Enter force in Newtons without sign">?</a>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="number" min="0" class="number-input" id="tb-pl-mag" class="input-box">
+                                </div>
+                            </div><!--end row magnitude label and tb-->
+
+                            <div class="row">
+                                <div class="col-sm-6">Pointing:
+                                    <a href="#" id="help-pl-pointing" data-toggle="tooltip" title=" Loads acting downwards are taken as negative, loads acting upwards are positive">?</a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div id="rb-pl-dir" class="radio">
+                                        <label><input type="radio" id="pl-up" name="optradio" checked>Up</label><br>
+                                        <label><input type="radio" id="pl-down" name="optradio" checked>Down</label>
+                                    </div>
+                                </div>
+                            </div><!--end row pointing rb-->
+
+                            <div class="row">
+                                <div class="col-sm-6">Location (m):</div>
+                                <div class="col-sm-6">
+                                    <div id="sl-pl-loc">
+                                        <input type="range" class="slider" name="rangeInput" min="0" step="0.1" id="loc-slider" oninput="updateLocationText(this.value);">
+                                        <input type="number" min="0" id="loc-value" value="" class="slider-text" oninput="updateLocationSlider(this.value)">
+                                    </div>
+                                </div>
+
+                            </div><!--end row pl location-->
+                            <br>
+
+                            <button id="add-point-load"  class="button tab-button" type="button" onclick="addForce()">Add</button>
+                            <button id="clear-point-load"  class="button tab-button" type="button">Clear</button>
+
+                          </div>
+
+                          <!--Add Moment Tab-->
+                          <div id="mom" class="tab-pane fade">
+                            <br>
+                            <p>Fill in the details to add a moment</p>
+
+                            <div class="row">
+                                <div class = "col-sm-6">
+                                    Magnitude (Nm): 
+                                    <a href="#" data-toggle="tooltip" title="Enter moment in Newton-meters without sign">?</a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="number" min="0" class="number-input" id="tb-mom-mag" class="input-box">
+                                </div>
+                            </div><!--end row mom magintude-->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Direction:
+                                    <a href="#" data-toggle="tooltip" title="Clockwise moments are negative and counter-clockwise moments are positive">?</a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div id="rb-mom-dir" class="radio">
+                                        <label><input type="radio" id="mom-cw" name="momradio" checked>Clockwise</label><br>
+                                        <label><input type="radio" id="mom-ccw" name="momradio" checked>Counterclockwise</label>
+                                    </div>
+                                </div>
+                            </div><!--end row mom dir-->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    Location (m):
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="range" class="slider" name="rangeInput" min="0" step="0.1" id="mom-loc-slider" oninput="updateMomentsText(this.value);">
+                                    <input type="number" min="0" id="mom-loc-value" class="slider-text" oninput="updateMomentsSlider(this.value)">
+                                </div>
+                            </div><!--end row mom loc-->
+                            
+                            <br>
+                            <button id="add-moment"  class="button tab-button" type="button" onclick="addMoment()">Add</button>
+                            <button id="clear-moment"  class="button tab-button" type="button">Clear</button>
+                          </div>
+
+                          <!--Add Distributed Load Tab-->
+                          <div id="dl" class="tab-pane fade">
+                            <br>
+                            <p>Fill in the details to add a distributed load</p>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <b>Type:</b>
+                                </div>
+                                <div class="col-sm-6">
+                                    <select id="cb-dl-type" class="input-box">
+                                        <option value="const">Constant</option>
+                                        <!--<option value="tri">Triangle</option>-->
+                                        <option value="trap">Trapezoidal</option>
+                                        <option value="poly">Polynomial Ramp</option>
+                                    </select>
+                                </div>
+                            </div><!--end row dl type-->
+
+                            <div class="dl-type" id="const">
+                                <img src="../static/dl_const.jpg">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        w (N/m):
+                                    </div>
+                                    <div class="col-sm-6">
+                                        
+                                        <input type="number" min="0" class="number-input dl-weight" id="dl-const-mag" class="input-box">
+                                        <input type="radio" name="rb-const-w" id="dl-const-up" checked >&uarr;
+                                        <input type="radio" name="rb-const-w" id="dl-const-down">&darr;
+                                                       
+                                    </div>                                         
+                                        
+                                </div><!-- end row w-->
+
+                                <b>Distribution Range:</b>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        a (m): 
+                                        <a href="#" data-toggle="tooltip" title="Location of starting point ">?</a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" min="0" class="number-input" class="number-input dl-loc" id="dl-const-a" class="input-box">
+                                    </div>
+                                </div><!--end row starting point a-->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        b (m): 
+                                        <a href="#" data-toggle="tooltip" title="Location of ending point ">?</a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" min="0" class="number-input dl-loc" id="dl-const-b" class="input-box">
+                                    </div>
+                                </div><!--end row ending point b-->
+                                
+                                
+                            </div><!--end constant dl div-->
+
+                            
+
+                            <div id="trap" class="dl-type" style="display:none ;">
+                                <img src="../static/dl_trap.jpg">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        w<sub>1</sub> (N/m):
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <input type="number" min="0" class="number-input" id="dl-trap-w1" class="input-box">
+                                            <input type="radio" name="rb-trap-w1" id="dl-trap-w1-up" autocomplete="off" checked>&uarr;
+                                            <input type="radio" name="rb-trap-w1" id="dl-trap-w1-down" autocomplete="off">&darr;
+                                    </div>
+                                </div><!-- end row w1-->
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        w<sub>2</sub> (N/m):
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" min="0" class="number-input" id="dl-trap-w2" class="input-box">
+                                        <input type="radio" name="rb-trap-w2" id="dl-trap-w2-up" autocomplete="off" checked>&uarr;
+                                        <input type="radio" name="rb-trap-w2" id="dl-trap-w2-down" autocomplete="off">&darr;
+                                    </div>
+                                </div><!-- end row w2-->
+
+                                <b>Distribution Range:</b>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        a (m): 
+                                        <a href="#" data-toggle="tooltip" title="Location of starting point ">?</a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" min="0" class="number-input" id="dl-trap-a" class="input-box">
+                                    </div>
+                                </div><!--end row starting point a-->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        b (m): 
+                                        <a href="#" data-toggle="tooltip" title="Location of ending point ">?</a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" min="0" class="number-input" id="dl-trap-b" class="input-box">
+                                    </div>
+                                </div><!--end row ending point b-->
+
+                            </div><!--end trap div-->
+
+                            <div id="poly" class="dl-type" style="display:none ;">
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        w<sub>1</sub> (N/m):
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <input type="number" min="0" class="number-input" id="dl-poly-w1" class="input-box">
+                                            <input type="radio" name="rb-poly-w1" id="dl-poly-w1-up" autocomplete="off" checked>&uarr;
+                                            <input type="radio" name="rb-poly-w1" id="dl-poly-w1-down" autocomplete="off">&darr;
+                                    </div>
+                                </div><!--end row -->
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        w<sub>2</sub> (N/m):
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <input type="number" min="0" class="number-input" id="dl-poly-w2" class="input-box">
+                                            <input type="radio" name="rb-poly-w2" id="dl-poly-w2-up" autocomplete="off" checked>&uarr;
+                                            <input type="radio" name="rb-poly-w2" id="dl-poly-w2-down" autocomplete="off">&darr;
+                                    </div>
+                                </div><!--end row -->
+
+                                <b> Polynomial Order: </b>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        Order: 
+                                        <a href="#" data-toggle="tooltip" title="Any positive or negative decimal number">?</a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" min="0" class="number-input" id="dl-poly-order" class="input-box">
+                                    </div>
+
+                                </div><!--end row order-->
+
+                                <b>Distribution Range:</b>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        a (m): 
+                                        <a href="#" data-toggle="tooltip" title="Location of starting point ">?</a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" min="0" class="number-input" id="dl-poly-a" class="input-box">
+                                    </div>
+                                </div><!--end row starting point a-->
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        b (m): 
+                                        <a href="#" data-toggle="tooltip" title="Location of ending point ">?</a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="number" min="0" class="number-input" id="dl-poly-b" class="input-box">
+                                    </div>
+                                </div><!--end row ending point b-->
+
+                            </div><!--end poly div-->
+
+                            
+
+                            <button id="add-dl"  class="button tab-button" type="button" onclick="addDistributedLoad()">Add</button>
+                            <button id="clear-dl"  class="button tab-button" type="button">Clear</button>
+
+                          </div><!--end dl tab-->
+                          
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+            </div>
+
+            <br>
+            <hr>
+            <div class="row">
+                
+                    <div id="tables" class="container">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <table class="table" id="supports-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Support</th>
+                                            <th>Location</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+            
+                            <div class="col-sm-3">
+                                    <table class="table" id="point-loads-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Force</th>
+                                                <th>Location</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                            </div>
+            
+                            <div class="col-sm-3">
+                                    <table class="table" id="moments-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Moment</th>
+                                                <th>Location</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                            </div>
+
+                            <div class="col-sm-3">
+                                    <table class="table" id="dl-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Load</th>
+                                                <th>Start</th>
+                                                <th>End</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>
+                            
+                    </div>
+            </div><!--end row tables-->
+
+        
+        <button class="button calculate" id="calculate">Calculate</button><br>
+    
+
+        </div>
+        
+{% endblock %}
+
+    

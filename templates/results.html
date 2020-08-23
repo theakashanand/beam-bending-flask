@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script>
+        window.onload = function(){
+            var d = new Date();
+            var n = d.getMilliseconds();
+            var img_sf = document.getElementById("img_sf");
+            var img_bm = document.getElementById("img_bm");
+            var img_slope = document.getElementById("img_slope");
+            var img_defl = document.getElementById("img_defl");
+            var img_beam = document.getElementById("img_beam");
+            img_sf.src = img_sf.src + "?" + n;
+            img_bm.src = img_bm.src + "?" + n;
+            img_slope.src = img_slope.src + "?" + n;
+            img_defl.src = img_defl.src + "?" + n;
+            img_beam.src = img_beam.src + "?" + n;
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="../static/form_styles.css">
+
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+
+  <title>Results</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+
+<div class="container">
+  <h2>Results</h2>
+  <p>Report prepared in total time: {{ time }} seconds.</p>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#gen">General</a></li>
+    <li><a data-toggle="tab" href="#sf">Shear Force</a></li>
+    <li><a data-toggle="tab" href="#bm">Bending Moment</a></li>
+    <li><a data-toggle="tab" href="#slope">Slope</a></li>
+    <li><a data-toggle="tab" href="#defl">Deflection</a></li>
+
+  </ul>
+
+  <div class="tab-content">
+    <div id="gen" class="tab-pane fade in active">
+      <h3>General</h3>
+      <p>General Loading Results are displayed here</p>
+      <b> Beam Properties</b>
+      <p>
+          Beam Length: {{ blen }} m
+          <br>
+          Elastic Modulus: {{ E }} Pa
+          <br>
+          Second Moment of Area: {{ I }} m<sup>4</sup>
+          <br>
+      </p>
+      <b> Loading Function</b>
+      <br>
+      {{ load_func }}
+      <br><br>
+      Reaction Loads: {{ reactions }} 
+      <br><br>
+      <p>The following image is for representative purposes only. There may be discrepancies with the actual loading conditions. Please check the loading function for the correct loads.</p>
+      <img id="img_beam" src="../static/beam_drawing.png">
+
+    </div><!--end gen tab-->
+    <div id="sf" class="tab-pane fade">
+      <h3>Shear Force</h3>
+      <p>Shear force loading results are displayed here</p>
+      <img id="img_sf" src="../static/sf_results.png">
+      <br>
+      <p>
+          <b>Shear Force Function: </b>{{ sf_func }}
+          <br>
+          {% if max_sf_loc>=0 %}
+            <b>Maximum Shear Force: </b>
+            <br>Force: {{ max_sf }} N
+            <br>Location: {{max_sf_loc }} m
+          {% else %}
+            <b>Maximum Shear Force: </b>
+            <br>Force: N/A. Calculation timed out.
+            <br>Location: N/A. Calculation timed out.
+          {% endif %}
+      </p>
+
+    </div><!--end sf tab-->
+
+    <div id="bm" class="tab-pane fade">
+      <h3>Bending Moment</h3>
+      <p>Bending moment results are displayed here</p>
+      <img id="img_bm" src="../static/bm_results.png">
+      <br>
+      <p>
+          <b>Bending Moment Function: </b>{{ bm_func }}
+          <br>
+          {% if max_bm_loc>=0 %}
+            <b>Maximum Bending Moment: </b>
+            <br>Moment: {{ max_bm }} Nm
+            <br>Location: {{max_bm_loc }} m
+          {% else %}
+            <b>Maximum Shear Force: </b>
+            <br>Force: N/A. Calculation timed out.
+            <br>Location: N/A. Calculation timed out.
+          {% endif %}
+      </p>
+    </div><!--end bm tab-->
+
+    <div id="slope" class="tab-pane fade">
+      <h3>Slope</h3>
+      <p>The slope of the deflected beam is plotted here</p>
+      <img id="img_slope" src="../static/slope_results.png">
+      <p>
+        <b>Slope Function: </b>{{ slope_func }}
+        <br>
+      </p>
+    </div><!--end slope tab-->
+    
+    <div id="defl" class="tab-pane fade">
+        <h3>Deflection</h3>
+        <p>Deflection of the beam is plotted here...</p>
+        <!--<img id="defl" src="data:image/png;base64,{{ figdata_png }}" width="500">-->
+        <img id="img_defl" src="../static/defl_results.png">
+        <p>
+            <b>Deflection Function: </b>{{ defl_func }}
+            <br>
+            <!--
+            <b>Maximum Deflection: </b>
+            <br>Deflection: {{ max_defl }} m
+            <br>Location: {{max_defl_loc }} m
+            -->
+        </p>
+    </div><!--end deflection tab-->
+  </div>
+</div>
+
+</body>
+</html>

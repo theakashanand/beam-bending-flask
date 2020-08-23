@@ -1,0 +1,336 @@
+<html lang="en">
+    
+    
+    <head>
+
+        <style>
+            div.tool{
+            border: 1px solid blue;
+            
+            }
+
+        </style>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <!--<script src="../static/script.js"></script>-->
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
+
+        <!-- Required meta tags -->
+        <meta http-equiv='cache-control' content='no-cache'>
+        <meta http-equiv='expires' content='0'>
+        <meta http-equiv='pragma' content='no-cache'>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        
+
+        <title>Beam Designer</title>
+
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown link
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="tool col-sm-3">
+                    <!--GEOMETRY-->
+                    <div id="geometry">
+                        <h4>Define Beam Geometry Here</h4>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Length</span>
+                            </div>
+                            <input id="beam-length" type="text" class="form-control" aria-label="Length" aria-descibedby="inputGroup-sizing-sm">
+                            <select id="tb-beam-length-unit" class="custom-select col-sm-3">
+                                <option selected>unit</option>
+                                <option value="m">m</option>
+                                <option value="cm">cm</option>
+                            </select> 
+                        </div>
+                        <div id="cb-cross-section" class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Cross Section</span>    
+                            </div>
+                            <select id="cb-cross-section-shape" class="custom-select">
+                                <option selected>Choose...</option>
+                                <option value="cus">Custom</option>
+                                <option value="rec">Rectangle</option>
+                                <option value="cir">Circle</option>
+                                <option value="box">Box</option>
+                                <option value="pipe">Pipe</option>
+                                <option value="i">I Beam</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tool col-sm-3">
+                    <!--SUPPORT-->
+                    <div id="support">
+                        <h4>Add Support Here</h4>
+                        <br>
+                        Support Type:
+                        <br>
+                        <div id="rb-support" class="radio">
+                            <label><input type="radio" id="rb-fixed" name="radiosupport" checked>Fixed</label>
+                            <label><input type="radio" id="rb-pin" name="radiosupport" checked>Pin</label>
+                            <label><input type="radio" id="rb-roller" name="radiosupport" checked>Roller</label>
+                        </div>
+                        <div id="sl-support-loc">
+                            <label>Location</label>
+                            <br>
+                            <input type="range" name="rangeInput" min="0" step="0.1" max="5" id="sup-loc-slider" oninput="updateSupportText(this.value);">
+                            <input type="text" id="sup-loc-value" value="" oninput="updateSupportSlider(this.value)">
+                        </div>
+                        <button id="add-support"  class="btn" type="button" onclick="addSupport()">Add</button>
+                        <button id="clear-point-load"  class="btn" type="button">Clear</button>
+
+                        <div>
+                            <table class="table" id="supports-table">
+                                <thead>
+                                    <tr>
+                                        <th>Support</th>
+                                        <th>Location</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tool col-sm-3">
+                    <!--POINT LOAD-->
+                    <div id="point-load">
+                <h4>Add Point Load Here</h4>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Force</span>
+                    </div>
+                    <input type="text" id="tb-pl-mag" class="form-control" aria-label="Length" aria-descibedby="inputGroup-sizing-sm">
+                    <select id="pl-mag-unit" class="custom-select col-sm-3">
+                        <option selected>unit</option>
+                        <option value="N">N</option>
+                        <option value="kN">kN</option>
+                    </select> 
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Direction</span>
+                        <div id="rb-pl-dir" class="radio">
+                            <label><input type="radio" id="pl-up" name="optradio" checked>Up</label>
+                            <label><input type="radio" id="pl-down" name="optradio" checked>Down</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sl-pl-loc">
+                    <label>Location</label>
+                    <br>
+                    <input type="range" name="rangeInput" min="0" step="0.1" max="5" id="loc-slider" oninput="updateLocationText(this.value);">
+                    <input type="text" id="loc-value" value="" oninput="updateLocationSlider(this.value)">
+                </div>
+
+                <button id="add-point-load"  class="btn" type="button" onclick="addForce()">Add</button>
+                <button id="clear-point-load"  class="btn" type="button">Clear</button>
+
+                <div>
+                    <table class="table" id="point-loads-table">
+                        <thead>
+                            <tr>
+                                <th>Force</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+            
+            
+
+                    </div>
+                </div>
+
+                <div class="tool col-sm-3">
+                    <!--MOMENT-->
+                    <div id="moment">
+                        <h4>Add Moment Here</h4>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Force</span>
+                            </div>
+                            <input type="text" id="tb-mom-mag" class="form-control" aria-label="Length" aria-descibedby="inputGroup-sizing-sm">
+                            <select id="mom-mag-unit" class="custom-select col-sm-3">
+                                <option selected>unit</option>
+                                <option value="N">Nm</option>
+                                <option value="kN">kNm</option>
+                            </select> 
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Direction</span>
+                                <div id="rb-mom-dir" class="radio">
+                                    <label><input type="radio" id="mom-cw" name="momradio" checked>Clockwise</label>
+                                    <label><input type="radio" id="mom-ccw" name="momradio" checked>Counterclockwise</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sl-mom-loc">
+                            <label>Location</label>
+                            <br>
+                            <input type="range" name="rangeInput" min="0" step="0.1" max="5" id="mom-loc-slider" oninput="updateMomentsText(this.value);">
+                            <input type="text" id="mom-loc-value" value="" oninput="updateMomentsSlider(this.value)">
+                        </div>
+
+                        <button id="add-moment"  class="btn" type="button" onclick="addMoment()">Add</button>
+                        <button id="clear-moment"  class="btn" type="button">Clear</button>
+
+                        <div>
+                            <table class="table" id="moments-table">
+                                <thead>
+                                    <tr>
+                                        <th>Moment</th>
+                                        <th>Location</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    
+                    
+
+                    </div>
+                </div>
+
+                
+
+
+                            
+            </div>
+                    
+        </div>
+        
+
+        
+        <button id="calculate">Calculate</button><br>
+
+        <div class="container">
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            <div class="row">
+
+                <div class="col-sm-6" id="beam-description">
+                    <h3>Beam Description</h3>
+                    <p id="label">Length (m): </p>
+
+                </div>
+
+                <div class="col-sm-6" id="add-feature-tabs">
+                    <h3>Add Supports or Loads</h3>
+                    <div class="container">
+
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a data-toggle="tab" href="#sup">Support</a></li>
+                          <li><a data-toggle="tab" href="#pl">Point Load</a></li>
+                          <li><a data-toggle="tab" href="#mom">Moment</a></li>
+                          <li><a data-toggle="tab" href="#dl">Distributed Load</a></li>                      
+                        </ul>
+                      
+                        <div class="tab-content">
+                          <div id="sup" class="tab-pane fade in active">
+                            <br>
+                            <p>Fill in the details to add a constraint</p>
+                          </div>
+                          <div id="pl" class="tab-pane fade">
+                            <br>
+                            <p>Fill in the details to add a point load</p>
+                          </div>
+                          <div id="mom" class="tab-pane fade">
+                            <br>
+                            <p>Fill in the details to add a moment</p>
+                          </div>
+                          <div id="dl" class="tab-pane fade">
+                            <br>
+                            <p>Fill in the details to add a distributed load</p>
+                          </div>
+                          
+                        </div>
+                      </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="Results Tab">
+            <h1 id="results-header" style="display:none;">Results:</h1>
+            <div id="load" class="alert alert-success" role="alert" style="display:none;"></div>
+            <div id="shearForce" class="alert alert-success" role="alert" style="display:none;"></div>
+            <div id="bendingMoment" class="alert alert-success" role="alert" style="display:none;"></div>
+            <!--<img id="graph-image" src="{{ url_for('static', filename='image.png') }}">-->
+            <!--<a onclick="window.open('/graphs.html', '_blank');" target="_blank">-->
+            <a href="graphs" target="_blank">
+                Click to see graphs
+            </a>
+            <a href="results" target="_blank">
+                Click for results report
+            </a>
+            
+        </div>
+
+    </body>
+
+    
+</html>
