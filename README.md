@@ -23,7 +23,7 @@
 
 ## Screenshots
 <p align="center">
-  <img alt="Inputs" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/Beam%20Analysis%2023-08-2020%2010-21-18.png" width=800/>
+  <img alt="Inputs" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/InputsDistributedLoadScreenshot.png" width=800/>
 </p>
 
 <p align="center">
