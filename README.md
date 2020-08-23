@@ -6,6 +6,6 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/theakashanand/beam-bending-flask/releases"><img alt="Release" src="https://img.shields.io/github/release/sagargurtu/lector.svg"/></a>
-  <a href="https://github.com/theakashanand/beam-bending-flask"><img alt="Code Size" src="https://img.shields.io/github/languages/code-size/sagargurtu/lector.svg"/></a>
+  <a href="https://github.com/theakashanand/beam-bending-flask/releases"><img alt="Release" src="https://img.shields.io/github/release/theakashanand/beam-bending-flask.svg"/></a>
+  <a href="https://github.com/theakashanand/beam-bending-flask"><img alt="Code Size" src="https://img.shields.io/github/languages/code-size/theakashanand/beam-bending-flask.svg"/></a>
 </p>
