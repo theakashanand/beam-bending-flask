@@ -1,5 +1,5 @@
 <h1 align = "center">
-  <a href="www.beam-designer.herokuapp.com">2D Beam Bending Simulator</a>
+  <a href="http://beam-designer.herokuapp.com">2D Beam Bending Simulator</a>
 </h1>
 <p align="center">
   A flask web application to simulate bending of beams under custom constraints and loading conditions.
