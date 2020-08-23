@@ -11,9 +11,20 @@
 </p>
 
 <p align="center">
-  <img alt="Inputs" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/InputsDistributedLoadScreenshot.png" width=800/>
+  <img alt="Inputs" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/InputsDistributedLoadScreenshot.jpg" width=800/>
 </p>
 
 <p align="center">
-  <img alt="Results" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/ShearForceScreenshot.png" width=800/>
+  <img alt="Results" src="https://github.com/theakashanand/beam-bending-flask/blob/master/docs/assets/screenshots/ShearForceScreenshot.jpg" width=800/>
 </p>
+
+## What's new?
+
+#### v1.0.0
+* First release.
+* Input Capabilities: Any arbitrary number of fixed supports, pin suppports, roller supports, point loads, moments, and distributed loads.
+* Supports constant, linear ramp, trapezoidal ramp, and general degree polynomial distributed loads.
+* Geometry: Beam shape may be rectangular, circular, pipe, I beam, or any custom moment of inertia.
+* Any arbitrary Young's modulus
+* Results: Plots shear force, bending moment, displacement, and slope of the loaded beam. Additionally gives a pictorial representation of the beam and it's loading conditions.
+
